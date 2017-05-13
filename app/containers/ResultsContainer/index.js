@@ -2,12 +2,11 @@ import React, { Component } from "react"
 import { View, ScrollView } from "react-native"
 import Loading from "../../components/Results/Loading"
 import Course from "../../components/Results/Course"
-/*import EmptyState from "components/Results/EmptyState";
-import Instructions from "components/Instructions";*/
+import EmptyState from "../../components/Results/EmptyState"
+import Instructions from "../../components/Instructions"
 
 class ResultsContainer extends Component {
   state = {
-    loading: true,
     results: [
       {
         abbreviation: "CSC",
@@ -228,7 +227,7 @@ class ResultsContainer extends Component {
           },
         ],
       },
-          {
+      {
         abbreviation: "CSC",
         number: "1240",
         hours: "3.0",
@@ -450,16 +449,22 @@ class ResultsContainer extends Component {
     ],
   }
 
-  _renderResults() {}
+  _renderResults() {
+    if (this.props.current_set && this.props.current_set.length > 0) {
+      return this.props.current_set.map((course, i) => (
+        <Course course={course} key={i} />
+      ))
+    } else if (this.props.has_search) {
+      return <EmptyState search={this.props.search_input} />
+    } else {
+      return <Instructions />
+    }
+  }
 
   render() {
-    const results = this.state.results.map((course, i) => {
-      return <Course key={i} course={course} />
-    })
-
     return (
-      <ScrollView style={{marginBottom: 10}}>
-        {this.props.current_loading ? <Loading /> : results}
+      <ScrollView style={{ marginBottom: 10 }}>
+        {this.props.current_loading ? <Loading /> : this._renderResults()}
       </ScrollView>
     )
   }
