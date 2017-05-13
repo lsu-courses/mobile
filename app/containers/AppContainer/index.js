@@ -9,8 +9,8 @@ class AppContainer extends React.Component {
       <View style={styles.view}>
         <View style={styles.header}>
           <Text style={styles.headerText}>LSU Course Offerings</Text>
+          <SearchContainer />
         </View>
-        <SearchContainer />
         <ResultsContainer />
       </View>
     )
@@ -20,16 +20,15 @@ class AppContainer extends React.Component {
 const styles = StyleSheet.create({
   view: {
     backgroundColor: "#eee",
-    flex: 1
+    flex: 1,
   },
   header: {
-    marginTop: 20,
-    height: 60,
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: "rgb(249, 249, 249)",
+    paddingTop: 30,
   },
   headerText: {
-    fontSize: 24,
+    fontSize: 22,
+    textAlign: "center",
   }
 })
 
