@@ -4,65 +4,69 @@ import { FontAwesome } from "@expo/vector-icons"
 
 const Instructions = () => {
   return (
-    <View style={styles.view}>
-      <Text style={styles.title}>Instructions</Text>
-
-      <View>
-        <Text style={styles.exampleDescription}>Department Name</Text>
-        <View style={styles.exampleContainer}>
-          <View style={styles.example}>
-            <Text style={styles.exampleText}>BIOL</Text>
-            <FontAwesome name="search" style={styles.searchIcon} />
-          </View>
-          <View style={styles.example}>
-            <Text style={styles.exampleText}>MATH</Text>
-            <FontAwesome name="search" style={styles.searchIcon} />
+    <View>
+      <Text style={styles.appTitle}>LSU Courses</Text>
+      <View style={styles.view}>
+        <View>
+          <Text style={styles.exampleDescription}>Department Name</Text>
+          <View style={styles.exampleContainer}>
+            <View style={styles.example}>
+              <Text style={styles.exampleText}>BIOL</Text>
+              <FontAwesome name="search" style={styles.searchIcon} />
+            </View>
+            <View style={styles.example}>
+              <Text style={styles.exampleText}>MATH</Text>
+              <FontAwesome name="search" style={styles.searchIcon} />
+            </View>
           </View>
         </View>
 
-      </View>
+        <View>
+          <Text style={styles.exampleDescription}>
+            Department name & course number
+          </Text>
+          <View style={styles.exampleContainer}>
+            <View style={styles.example}>
+              <Text style={styles.exampleText}>HNRS 2030</Text>
+              <FontAwesome name="search" style={styles.searchIcon} />
+            </View>
+            <View style={styles.example}>
+              <Text style={styles.exampleText}>BIOL 1002</Text>
+              <FontAwesome name="search" style={styles.searchIcon} />
+            </View>
+          </View>
+        </View>
 
-      <View>
-        <Text style={styles.exampleDescription}>
-          Department name & course number
+        <View>
+          <Text style={styles.exampleDescription}>
+            Department name & course name
+          </Text>
+          <View style={styles.exampleContainer}>
+            <View style={styles.example}>
+              <Text style={styles.exampleText}>MATH algebra</Text>
+              <FontAwesome name="search" style={styles.searchIcon} />
+            </View>
+            <View style={styles.example}>
+              <Text style={styles.exampleText}>BIOL micro</Text>
+              <FontAwesome name="search" style={styles.searchIcon} />
+            </View>
+          </View>
+        </View>
+
+        <Text style={styles.credits}>
+          App made by Cody Wall and Connor Elsea
         </Text>
-        <View style={styles.exampleContainer}>
-          <View style={styles.example}>
-            <Text style={styles.exampleText}>HNRS 2030</Text>
-            <FontAwesome name="search" style={styles.searchIcon} />
-          </View>
-          <View style={styles.example}>
-            <Text style={styles.exampleText}>BIOL 1002</Text>
-            <FontAwesome name="search" style={styles.searchIcon} />
-          </View>
-        </View>
       </View>
-
-      <View>
-        <Text style={styles.exampleDescription}>
-          Department name & course name
-        </Text>
-        <View style={styles.exampleContainer}>
-          <View style={styles.example}>
-            <Text style={styles.exampleText}>MATH algebra</Text>
-            <FontAwesome name="search" style={styles.searchIcon} />
-          </View>
-          <View style={styles.example}>
-            <Text style={styles.exampleText}>BIOL micro</Text>
-            <FontAwesome name="search" style={styles.searchIcon} />
-          </View>
-        </View>
-      </View>
-
-      <Text style={styles.credits}>
-        App made by Cody Wall and Connor Elsea
-      </Text>
-
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  appTitle: {
+    textAlign: "center",
+    marginTop: 20,
+    fontSize: 32,
+  },
   view: {
     backgroundColor: "white",
     borderRadius: 5,

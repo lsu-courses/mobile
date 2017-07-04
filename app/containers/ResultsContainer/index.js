@@ -13,7 +13,8 @@ class ResultsContainer extends Component {
         number: "1240",
         hours: "3.0",
         full_title: "Statistics and Graphics with MATLAB",
-        description: "This is a General Education course. Prereq.: MATH 1021   or placement in MATH 1022 , MATH 1023 , MATH 1431 , MATH 1550  or MATH 1551 . Credit will not be given for both this course and CSC 2262  or CSC 2533  or OCS 2011 . Not for degree credit for computer science majors. 2 hrs. lecture; 2 hrs. lab.",
+        description:
+          "This is a General Education course. Prereq.: MATH 1021   or placement in MATH 1022 , MATH 1023 , MATH 1431 , MATH 1550  or MATH 1551 . Credit will not be given for both this course and CSC 2262  or CSC 2533  or OCS 2011 . Not for degree credit for computer science majors. 2 hrs. lecture; 2 hrs. lab.",
         comments: [
           "CSC 1240 - TWO EXAMS ON A TUESDAY 6:00 - 8:00PM",
           "CSC 1240 (S1-LAB): PFT 1124-A",
@@ -232,7 +233,8 @@ class ResultsContainer extends Component {
         number: "1240",
         hours: "3.0",
         full_title: "Statistics and Graphics with MATLAB",
-        description: "This is a General Education course. Prereq.: MATH 1021   or placement in MATH 1022 , MATH 1023 , MATH 1431 , MATH 1550  or MATH 1551 . Credit will not be given for both this course and CSC 2262  or CSC 2533  or OCS 2011 . Not for degree credit for computer science majors. 2 hrs. lecture; 2 hrs. lab.",
+        description:
+          "This is a General Education course. Prereq.: MATH 1021   or placement in MATH 1022 , MATH 1023 , MATH 1431 , MATH 1550  or MATH 1551 . Credit will not be given for both this course and CSC 2262  or CSC 2533  or OCS 2011 . Not for degree credit for computer science majors. 2 hrs. lecture; 2 hrs. lab.",
         comments: [
           "CSC 1240 - TWO EXAMS ON A TUESDAY 6:00 - 8:00PM",
           "CSC 1240 (S1-LAB): PFT 1124-A",
@@ -449,11 +451,11 @@ class ResultsContainer extends Component {
     ],
   }
 
-  _renderResults() {
+  renderResults() {
     if (this.props.current_set && this.props.current_set.length > 0) {
-      return this.props.current_set.map((course, i) => (
+      return this.props.current_set.map((course, i) =>
         <Course course={course} key={i} />
-      ))
+      )
     } else if (this.props.has_search) {
       return <EmptyState search={this.props.search_input} />
     } else {
@@ -464,7 +466,7 @@ class ResultsContainer extends Component {
   render() {
     return (
       <ScrollView style={{ marginBottom: 10 }}>
-        {this.props.current_loading ? <Loading /> : this._renderResults()}
+        {this.props.current_loading ? <Loading /> : this.renderResults()}
       </ScrollView>
     )
   }
