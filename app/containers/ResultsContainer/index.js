@@ -1,11 +1,12 @@
-import React, { Component } from "react"
+import React from "react"
+import { connect } from "react-redux"
 import { View, ScrollView } from "react-native"
 import Loading from "../../components/Results/Loading"
 import Course from "../../components/Results/Course"
 import EmptyState from "../../components/Results/EmptyState"
 import Instructions from "../../components/Instructions"
 
-class ResultsContainer extends Component {
+class ResultsContainer extends React.Component {
   state = {
     results: [
       {
@@ -472,4 +473,13 @@ class ResultsContainer extends Component {
   }
 }
 
-export default ResultsContainer
+const mapStateToProps = function(state) {
+  return {
+    current_set: state.search.current_set,
+    current_loading: state.search.current_loading,
+    has_search: state.search.has_search,
+    search_input: state.search.search_input,
+  }
+}
+
+export default connect(mapStateToProps)(ResultsContainer)

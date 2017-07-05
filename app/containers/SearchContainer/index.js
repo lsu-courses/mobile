@@ -1,7 +1,58 @@
 import React from "react"
+import { connect } from "react-redux"
 import { Platform, View, TextInput, StyleSheet } from "react-native"
+import {
+  performSearch,
+  requestDepartment,
+  filterDepartment,
+  clearDepartment,
+  setGlobalSearch,
+} from "../../redux/ducks/search"
 
 class SearchContainer extends React.Component {
+  processInput(input) {
+    const lower = input.toLowerCase()
+    const searchInputArray = lower.split(" ")
+
+    return {
+      text: lower,
+      searchInputArray,
+      rest:
+        searchInputArray.length > 1
+          ? lower.slice(lower.indexOf(" ")).trim()
+          : "",
+    }
+  }
+
+  performSearch(input) {
+    this.props.setGlobalSearch(input)
+
+    const { text, searchInputArray, rest } = this.processInput(input)
+
+    if (input.length < 2) {
+      return this.props.clearDepartment()
+    }
+
+    const firstWord = searchInputArray[0]
+
+    if (isNaN(firstWord)) {
+      if (this.props.current_department === firstWord) {
+        this.props.filterDepartment(rest)
+      } else {
+        if (this.props.department_cache[firstWord]) {
+          this.props.filterDepartment(rest, firstWord)
+        } else {
+          this.props
+            .requestDepartment(firstWord)
+            .then(() => {
+              this.props.filterDepartment(rest)
+            })
+            .catch(err => console.log(err))
+        }
+      }
+    }
+  }
+
   render() {
     return (
       <View style={styles.view}>
@@ -10,12 +61,36 @@ class SearchContainer extends React.Component {
           autoCapitalize={"none"}
           autoCorrect={false}
           placeholder={"Search"}
-          ref="SearchInput"
+          onChangeText={value => this.performSearch(value)}
         />
       </View>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    results: state.search.results || [],
+    current_set: state.search.current_set,
+    current_loading: state.search.current_loading,
+    current_department: state.search.current_department,
+    department_cache: state.search.department_cache,
+    has_search: state.search.has_search,
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    performSearch: input => dispatch(performSearch(input)),
+    clearDepartment: () => dispatch(clearDepartment()),
+    requestDepartment: dept => dispatch(requestDepartment(dept)),
+    filterDepartment: (filter, change) =>
+      dispatch(filterDepartment(filter, change)),
+    setGlobalSearch: input => dispatch(setGlobalSearch(input)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer)
 
 const styles = StyleSheet.create({
   view: {
@@ -35,5 +110,3 @@ const styles = StyleSheet.create({
     paddingLeft: 14,
   },
 })
-
-export default SearchContainer
