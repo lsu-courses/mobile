@@ -1,18 +1,28 @@
 import Expo from "expo"
 import React from "react"
-import { Text, View } from "react-native"
-import AppContainer from "./app/containers/AppContainer/"
-import { Provider } from "react-redux"
-import configureStore from "./app/redux/utils/store"
+import { Text, StyleSheet, View } from "react-native"
+import SearchContainer from "app/containers/SearchContainer"
+import ResultsContainer from "app/containers/ResultsContainer"
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <Provider store={configureStore()}>
-        <AppContainer />
-      </Provider>
-    )
-  }
-}
+const App = () => (
+  <View style={styles.view}>
+    <View style={styles.header}>
+      <SearchContainer />
+    </View>
+    <ResultsContainer />
+  </View>
+)
 
+export default App
 Expo.registerRootComponent(App)
+
+const styles = StyleSheet.create({
+  view: {
+    backgroundColor: "#eee",
+    flex: 1,
+  },
+  header: {
+    backgroundColor: "rgb(249, 249, 249)",
+    paddingTop: 20,
+  },
+})

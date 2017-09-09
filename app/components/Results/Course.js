@@ -1,7 +1,7 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
-import CourseDescription from "../../components/Results/CourseDescription"
-import Section from "../../components/Results/Section"
+import CourseDescription from "app/components/Results/CourseDescription"
+import Section from "app/components/Results/Section"
 
 const haveSameName = sections => {
   const name = sections[0].title
@@ -29,9 +29,7 @@ const Course = ({
           <Text style={styles.headingNameAbbreviation}>{abbreviation}</Text>
           <Text style={styles.headingNameNumber}>{number}</Text>
         </View>
-        <Text style={styles.headingFullTitle}>
-          {full_title}
-        </Text>
+        <Text style={styles.headingFullTitle}>{full_title}</Text>
       </View>
 
       <View style={styles.headingInfo}>
@@ -42,9 +40,11 @@ const Course = ({
       </View>
     </View>
 
-    {description
-      ? <CourseDescription description={description} comments={comments} />
-      : undefined}
+    {description ? (
+      <CourseDescription description={description} comments={comments} />
+    ) : (
+      undefined
+    )}
 
     <Text style={[styles.padded, styles.sectionsHeader]}>Sections</Text>
 
@@ -53,7 +53,6 @@ const Course = ({
         <Section key={i} haveSameName={haveSameName(sections)} {...sec} />
       ))}
     </View>
-
   </View>
 )
 

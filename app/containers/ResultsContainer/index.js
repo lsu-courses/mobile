@@ -1,10 +1,10 @@
 import React from "react"
 import { connect } from "react-redux"
 import { View, ScrollView } from "react-native"
-import Loading from "../../components/Results/Loading"
-import Course from "../../components/Results/Course"
-import EmptyState from "../../components/Results/EmptyState"
-import Instructions from "../../components/Instructions"
+import Loading from "app/components/Results/Loading"
+import Course from "app/components/Results/Course"
+import EmptyState from "app/components/Results/EmptyState"
+import Instructions from "app/components/Instructions"
 
 class ResultsContainer extends React.Component {
   state = {
@@ -453,33 +453,24 @@ class ResultsContainer extends React.Component {
   }
 
   renderResults() {
-    if (this.props.current_set && this.props.current_set.length > 0) {
-      return this.props.current_set.map((course, i) =>
-        <Course course={course} key={i} />
-      )
-    } else if (this.props.has_search) {
-      return <EmptyState search={this.props.search_input} />
-    } else {
-      return <Instructions />
-    }
+    // if (this.props.current_set && this.props.current_set.length > 0) {
+    //   return this.props.current_set.map((course, i) => (
+    //     <Course course={course} key={i} />
+    //   ))
+    // } else if (this.props.has_search) {
+    //   return <EmptyState search={this.props.search_input} />
+    // } else {
+    //   return <Instructions />
+    // }
   }
 
   render() {
     return (
       <ScrollView style={{ marginBottom: 10 }}>
-        {this.props.current_loading ? <Loading /> : this.renderResults()}
+        {/*this.props.current_loading ? <Loading /> : this.renderResults()*/}
       </ScrollView>
     )
   }
 }
 
-const mapStateToProps = function(state) {
-  return {
-    current_set: state.search.current_set,
-    current_loading: state.search.current_loading,
-    has_search: state.search.has_search,
-    search_input: state.search.search_input,
-  }
-}
-
-export default connect(mapStateToProps)(ResultsContainer)
+export default ResultsContainer

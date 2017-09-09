@@ -1,7 +1,7 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
-import StudentCounter from "../../components/Results/StudentCounter"
-import Interval from "../../components/Results/Interval";
+import StudentCounter from "app/components/Results/StudentCounter"
+import Interval from "app/components/Results/Interval"
 
 const Section = ({
   number,

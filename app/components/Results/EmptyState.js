@@ -1,6 +1,6 @@
 import React from "react"
 import { View, Text } from "react-native"
-import Instructions from "../Instructions"
+import Instructions from "app/components/Instructions"
 
 const EmptyState = ({ search }) => {
   return (

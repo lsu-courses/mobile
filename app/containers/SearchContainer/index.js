@@ -1,56 +1,10 @@
 import React from "react"
 import { connect } from "react-redux"
-import { Platform, View, TextInput, StyleSheet } from "react-native"
-import {
-  performSearch,
-  requestDepartment,
-  filterDepartment,
-  clearDepartment,
-  setGlobalSearch,
-} from "../../redux/ducks/search"
+import { Platform, Text, TextInput, StyleSheet, View } from "react-native"
 
 class SearchContainer extends React.Component {
-  processInput(input) {
-    const lower = input.toLowerCase()
-    const searchInputArray = lower.split(" ")
-
-    return {
-      text: lower,
-      searchInputArray,
-      rest:
-        searchInputArray.length > 1
-          ? lower.slice(lower.indexOf(" ")).trim()
-          : "",
-    }
-  }
-
   performSearch(input) {
-    this.props.setGlobalSearch(input)
-
-    const { text, searchInputArray, rest } = this.processInput(input)
-
-    if (input.length < 2) {
-      return this.props.clearDepartment()
-    }
-
-    const firstWord = searchInputArray[0]
-
-    if (isNaN(firstWord)) {
-      if (this.props.current_department === firstWord) {
-        this.props.filterDepartment(rest)
-      } else {
-        if (this.props.department_cache[firstWord]) {
-          this.props.filterDepartment(rest, firstWord)
-        } else {
-          this.props
-            .requestDepartment(firstWord)
-            .then(() => {
-              this.props.filterDepartment(rest)
-            })
-            .catch(err => console.log(err))
-        }
-      }
-    }
+    console.log(input)
   }
 
   render() {
@@ -68,29 +22,7 @@ class SearchContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    results: state.search.results || [],
-    current_set: state.search.current_set,
-    current_loading: state.search.current_loading,
-    current_department: state.search.current_department,
-    department_cache: state.search.department_cache,
-    has_search: state.search.has_search,
-  }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    performSearch: input => dispatch(performSearch(input)),
-    clearDepartment: () => dispatch(clearDepartment()),
-    requestDepartment: dept => dispatch(requestDepartment(dept)),
-    filterDepartment: (filter, change) =>
-      dispatch(filterDepartment(filter, change)),
-    setGlobalSearch: input => dispatch(setGlobalSearch(input)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer)
+export default SearchContainer
 
 const styles = StyleSheet.create({
   view: {
