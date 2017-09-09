@@ -7,9 +7,11 @@ import style from "app/utils/style"
 
 export default class App extends React.Component {
   state = {
-    loading: true,
+    loading: false,
     currentSearch: "",
-    currentResults: [
+    currentResults: [],
+
+    /*[
       {
         abbreviation: "CSC",
         number: "1240",
@@ -451,10 +453,15 @@ export default class App extends React.Component {
         ],
       },
     ],
+  */
   }
 
   performSearch(input) {
     this.setState({ currentSearch: input })
+  }
+
+  setSearch(text) {
+    this.performSearch(text)
   }
 
   render() {
@@ -462,11 +469,15 @@ export default class App extends React.Component {
 
     return (
       <View style={styles.view}>
-        <SearchContainer performSearch={this.performSearch.bind(this)} />
+        <SearchContainer
+          currentSearch={currentSearch}
+          performSearch={this.performSearch.bind(this)}
+        />
         <ResultsContainer
           loading={loading}
           currentSearch={currentSearch}
           currentResults={currentResults}
+          setSearch={this.setSearch.bind(this)}
         />
       </View>
     )

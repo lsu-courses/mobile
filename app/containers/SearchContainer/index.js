@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { Platform, Text, TextInput, StyleSheet, View } from "react-native"
 import style from "app/utils/style"
 
-export default ({ performSearch }) => (
+export default ({ currentSearch, performSearch }) => (
   <View style={styles.container}>
     <View style={styles.headingContainer}>
       <Text style={styles.heading}>LSU Course Offerings</Text>
@@ -14,6 +14,7 @@ export default ({ performSearch }) => (
       autoCapitalize={"none"}
       autoCorrect={false}
       placeholder={"Search"}
+      value={currentSearch}
       onChangeText={search => performSearch(search)}
     />
   </View>
@@ -24,6 +25,9 @@ const styles = StyleSheet.create({
     backgroundColor: style.colors.almostWhite,
     paddingBottom: 5,
     paddingTop: 30,
+    shadowOffset: { height: 0, width: 0 },
+    shadowOpacity: 0.15,
+    shadowRadius: 2,
   },
   headingContainer: {
     paddingBottom: 15,

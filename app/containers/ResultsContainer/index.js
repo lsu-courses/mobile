@@ -8,16 +8,28 @@ import Instructions from "app/components/Instructions"
 
 export default class ResultsContainer extends React.Component {
   renderResults() {
-    //h
+    const { currentSearch, currentResults, setSearch } = this.props
+
+    if (currentResults && currentResults.length > 0) {
+      return currentResults.map((course, i) => (
+        <Course course={course} key={i + course.abbreviation + course.number} />
+      ))
+    } else if (currentSearch && currentSearch.length > 0) {
+      return <EmptyState search={currentSearch} />
+    } else {
+      return <Instructions setSearch={setSearch} />
+    }
   }
 
   render() {
-    const { loading, currentSearch, currentResults } = this.props
+    const { loading, setSearch } = this.props
 
     return (
-      <ScrollView style={styles.container}>
-        {loading && <Loading />}
-        {this.renderResults()}
+      <ScrollView>
+        <View style={styles.container}>
+          {loading && <Loading setSearch={setSearch} />}
+          {this.renderResults()}
+        </View>
       </ScrollView>
     )
   }
@@ -26,18 +38,6 @@ export default class ResultsContainer extends React.Component {
 const styles = StyleSheet.create({
   container: {
     padding: 15,
-    marginBottom: 10,
+    paddingBottom: 30,
   },
 })
-
-// renderResults() {
-//   // if (this.props.current_set && this.props.current_set.length > 0) {
-//   //   return this.props.current_set.map((course, i) => (
-//   //     <Course course={course} key={i} />
-//   //   ))
-//   // } else if (this.props.has_search) {
-//   //   return <EmptyState search={this.props.search_input} />
-//   // } else {
-//   //   return <Instructions />
-//   // }
-// }

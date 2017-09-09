@@ -1,55 +1,54 @@
 import React from "react"
-import { View, Text, StyleSheet } from "react-native"
+import { StyleSheet, Text, TouchableHighlight, View } from "react-native"
 import { FontAwesome } from "@expo/vector-icons"
+import style from "app/utils/style"
 
-const Instructions = () => {
-  return (
-    <View>
-      <Text style={styles.appTitle}>LSU Courses</Text>
+export default class Instructions extends React.Component {
+  exampleSearch(text) {
+    const { setSearch } = this.props
+
+    return (
+      <TouchableHighlight
+        onPress={() => setSearch(text)}
+        underlayColor={"transparent"}
+      >
+        <View style={styles.example}>
+          <Text style={styles.exampleText}>{text}</Text>
+          <FontAwesome name="search" style={styles.searchIcon} />
+        </View>
+      </TouchableHighlight>
+    )
+  }
+
+  render() {
+    return (
       <View style={styles.view}>
+        <Text style={styles.intro}>Search by...</Text>
         <View>
-          <Text style={styles.exampleDescription}>Department Name</Text>
+          <Text style={styles.exampleDescription}>department name</Text>
           <View style={styles.exampleContainer}>
-            <View style={styles.example}>
-              <Text style={styles.exampleText}>BIOL</Text>
-              <FontAwesome name="search" style={styles.searchIcon} />
-            </View>
-            <View style={styles.example}>
-              <Text style={styles.exampleText}>MATH</Text>
-              <FontAwesome name="search" style={styles.searchIcon} />
-            </View>
+            {this.exampleSearch("BIOL")}
+            {this.exampleSearch("MATH")}
           </View>
         </View>
 
         <View>
           <Text style={styles.exampleDescription}>
-            Department name & course number
+            department name + course number
           </Text>
           <View style={styles.exampleContainer}>
-            <View style={styles.example}>
-              <Text style={styles.exampleText}>HNRS 2030</Text>
-              <FontAwesome name="search" style={styles.searchIcon} />
-            </View>
-            <View style={styles.example}>
-              <Text style={styles.exampleText}>BIOL 1002</Text>
-              <FontAwesome name="search" style={styles.searchIcon} />
-            </View>
+            {this.exampleSearch("HNRS 2030")}
+            {this.exampleSearch("BIOL 1002")}
           </View>
         </View>
 
         <View>
           <Text style={styles.exampleDescription}>
-            Department name & course name
+            department name + course name
           </Text>
           <View style={styles.exampleContainer}>
-            <View style={styles.example}>
-              <Text style={styles.exampleText}>MATH algebra</Text>
-              <FontAwesome name="search" style={styles.searchIcon} />
-            </View>
-            <View style={styles.example}>
-              <Text style={styles.exampleText}>BIOL micro</Text>
-              <FontAwesome name="search" style={styles.searchIcon} />
-            </View>
+            {this.exampleSearch("HMATH algebra")}
+            {this.exampleSearch("BIOL micro")}
           </View>
         </View>
 
@@ -57,64 +56,59 @@ const Instructions = () => {
           App made by Cody Wall and Connor Elsea
         </Text>
       </View>
-    </View>
-  )
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-  appTitle: {
-    textAlign: "center",
-    marginTop: 20,
-    fontSize: 32,
-  },
   view: {
     backgroundColor: "white",
-    borderRadius: 5,
-    marginTop: 20,
-    marginLeft: 10,
-    marginRight: 10,
+    borderRadius: 6,
     padding: 10,
-    paddingTop: 20,
     paddingBottom: 20,
-    shadowRadius: 2,
+    paddingTop: 20,
+    shadowOffset: { height: 0, width: 0 },
     shadowOpacity: 0.15,
-    shadowOffset: { height: 2, width: 2 },
+    shadowRadius: 2,
   },
-  title: {
-    fontSize: 32,
-    marginBottom: 20,
+  intro: {
+    color: style.colors.almostBlack,
+    fontSize: 20,
+    marginBottom: 30,
+    textAlign: "center",
   },
   exampleContainer: {
     flexDirection: "row",
+    justifyContent: "center",
     marginBottom: 20,
   },
   exampleDescription: {
-    marginTop: 10,
-    marginBottom: 10,
     fontSize: 22,
     fontWeight: "300",
+    marginBottom: 10,
+    marginTop: 10,
+    textAlign: "center",
   },
   example: {
-    borderWidth: 1,
     borderRadius: 5,
-    borderColor: "lightgray",
-    padding: 10,
     flexDirection: "row",
     marginRight: 10,
+    padding: 10,
+    backgroundColor: style.colors.lightPurple,
   },
   exampleText: {
+    color: style.colors.defaultGray,
+    fontSize: 16,
+    fontWeight: "500",
     marginRight: 10,
-    fontSize: 22,
   },
   searchIcon: {
-    fontSize: 22,
+    color: style.colors.defaultGray,
+    fontSize: 16,
     fontWeight: "100",
-    color: "lightgray",
   },
   credits: {
     textAlign: "center",
     marginTop: 40,
   },
 })
-
-export default Instructions
