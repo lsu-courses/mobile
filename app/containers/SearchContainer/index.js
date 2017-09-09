@@ -3,30 +3,21 @@ import { connect } from "react-redux"
 import { Platform, Text, TextInput, StyleSheet, View } from "react-native"
 import style from "app/utils/style"
 
-class SearchContainer extends React.Component {
-  performSearch(input) {
-    console.log(input)
-  }
+export default ({ performSearch }) => (
+  <View style={styles.container}>
+    <View style={styles.headingContainer}>
+      <Text style={styles.heading}>LSU Course Offerings</Text>
+    </View>
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.headingContainer}>
-          <Text style={styles.heading}>LSU Course Offerings</Text>
-        </View>
-        <TextInput
-          style={styles.input}
-          autoCapitalize={"none"}
-          autoCorrect={false}
-          placeholder={"Search"}
-          onChangeText={value => this.performSearch(value)}
-        />
-      </View>
-    )
-  }
-}
-
-export default SearchContainer
+    <TextInput
+      style={styles.input}
+      autoCapitalize={"none"}
+      autoCorrect={false}
+      placeholder={"Search"}
+      onChangeText={search => performSearch(search)}
+    />
+  </View>
+)
 
 const styles = StyleSheet.create({
   container: {

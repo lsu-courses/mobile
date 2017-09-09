@@ -5,14 +5,21 @@ import SearchContainer from "app/containers/SearchContainer"
 import ResultsContainer from "app/containers/ResultsContainer"
 import style from "app/utils/style"
 
-const App = () => (
-  <View style={styles.view}>
-    <SearchContainer />
-    <ResultsContainer />
-  </View>
-)
+export default class App extends React.Component {
+  performSearch(input) {
+    console.log(input)
+  }
 
-export default App
+  render() {
+    return (
+      <View style={styles.view}>
+        <SearchContainer performSearch={this.performSearch.bind(this)} />
+        <ResultsContainer />
+      </View>
+    )
+  }
+}
+
 Expo.registerRootComponent(App)
 
 const styles = StyleSheet.create({
