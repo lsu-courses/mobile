@@ -1,12 +1,15 @@
 import React from "react"
-import { View, Text } from "react-native"
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native"
+import style from "app/utils/style"
 
-const Loading = () => {
-  return (
-    <View>
-      <Text>Loading...</Text>
-    </View>
-  )
-}
+export default () => (
+  <View style={styles.container}>
+    <ActivityIndicator size="large" color={style.colors.purple} />
+  </View>
+)
 
-export default Loading
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 15,
+  },
+})
