@@ -30,7 +30,8 @@ export default class CourseDescription extends React.Component {
 
     return (
       <View>
-        {description &&
+        {description !== undefined &&
+        description !== null &&
         description.length > 0 && (
           <View>
             <Text style={styles.title}>DETAILS</Text>
@@ -38,7 +39,8 @@ export default class CourseDescription extends React.Component {
           </View>
         )}
 
-        {comments &&
+        {comments !== undefined &&
+        comments !== null &&
         comments.length > 0 && (
           <View>
             <Text style={styles.title}>COMMENTS</Text>
