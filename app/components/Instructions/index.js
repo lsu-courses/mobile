@@ -5,11 +5,11 @@ import style from "app/utils/style"
 
 export default class Instructions extends React.Component {
   exampleSearch(text) {
-    const { setSearch } = this.props
+    const { performSearch } = this.props
 
     return (
       <TouchableHighlight
-        onPress={() => setSearch(text)}
+        onPress={() => performSearch(text)}
         underlayColor={"transparent"}
       >
         <View style={styles.example}>
@@ -47,7 +47,7 @@ export default class Instructions extends React.Component {
             department name + course name
           </Text>
           <View style={styles.exampleContainer}>
-            {this.exampleSearch("HMATH algebra")}
+            {this.exampleSearch("MATH algebra")}
             {this.exampleSearch("BIOL micro")}
           </View>
         </View>

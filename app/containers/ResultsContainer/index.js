@@ -8,26 +8,24 @@ import Instructions from "app/components/Instructions"
 
 export default class ResultsContainer extends React.Component {
   renderResults() {
-    const { currentSearch, currentResults, setSearch } = this.props
+    const { currentSearch, currentResults, loading, performSearch } = this.props
 
     if (currentResults && currentResults.length > 0) {
       return currentResults.map((course, i) => (
         <Course course={course} key={i + course.abbreviation + course.number} />
       ))
-    } else if (currentSearch && currentSearch.length > 0) {
+    } else if (currentSearch && currentSearch.length > 0 && !loading) {
       return <EmptyState search={currentSearch} />
     } else {
-      return <Instructions setSearch={setSearch} />
+      return <Instructions performSearch={performSearch} />
     }
   }
 
   render() {
-    const { loading, setSearch } = this.props
-
     return (
       <ScrollView>
         <View style={styles.container}>
-          {loading && <Loading setSearch={setSearch} />}
+          {this.props.loading && <Loading />}
           {this.renderResults()}
         </View>
       </ScrollView>

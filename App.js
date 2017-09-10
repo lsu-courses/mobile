@@ -457,11 +457,7 @@ export default class App extends React.Component {
   }
 
   performSearch(input) {
-    this.setState({ currentSearch: input })
-  }
-
-  setSearch(text) {
-    this.performSearch(text)
+    this.setState({ currentSearch: input, loading: true })
   }
 
   render() {
@@ -477,7 +473,7 @@ export default class App extends React.Component {
           loading={loading}
           currentSearch={currentSearch}
           currentResults={currentResults}
-          setSearch={this.setSearch.bind(this)}
+          performSearch={this.performSearch.bind(this)}
         />
       </View>
     )
