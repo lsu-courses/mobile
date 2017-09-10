@@ -2,8 +2,9 @@ import React from "react"
 import { View, Text, StyleSheet } from "react-native"
 import StudentCounter from "app/components/Results/StudentCounter"
 import Interval from "app/components/Results/Interval"
+import style from "app/utils/style"
 
-const Section = ({
+export default ({
   number,
   title,
   enrollment_available,
@@ -12,7 +13,6 @@ const Section = ({
   enrollment_total,
   timeIntervals,
   special,
-  hasSameName,
 }) => (
   <View
     style={[
@@ -35,38 +35,37 @@ const Section = ({
       }
     </View>
 
-    <View className="Section__content">
-      <View className="Section__intervals">
-        {timeIntervals.map((interval, i) => <Interval key={i} {...interval} />)}
-      </View>
+    <View>
+      {timeIntervals.map((interval, i) => (
+        <Interval key={number + title + i} {...interval} />
+      ))}
     </View>
   </View>
 )
 
 const styles = StyleSheet.create({
   view: {
-    padding: 10,
     justifyContent: "space-between",
-    paddingBottom: 20,
     marginTop: 10,
+    padding: 10,
+    paddingBottom: 20,
   },
   top: {
     flexDirection: "row",
     justifyContent: "space-around",
   },
   title: {
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
   },
   titleHeader: {
-    fontSize: 16,
     color: "gray",
+    fontSize: 16,
     fontWeight: "bold",
   },
   titleSection: {
+    color: style.colors.almostBlack,
     fontSize: 32,
     fontWeight: "bold",
   },
 })
-
-export default Section

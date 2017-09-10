@@ -1,5 +1,6 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
+import style from "app/utils/style"
 
 const StudentCounter = ({
   enrollment_available,
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   percent: {
+    color: style.colors.almostBlack,
     fontSize: 14,
     fontWeight: "500",
   },

@@ -2,16 +2,9 @@ import React from "react"
 import { View, Text, StyleSheet } from "react-native"
 import CourseDescription from "app/components/Results/CourseDescription"
 import Section from "app/components/Results/Section"
+import style from "app/utils/style"
 
-const haveSameName = sections => {
-  const name = sections[0].title
-  sections.forEach(sec => {
-    if (sec.title !== name) return false
-  })
-  return true
-}
-
-const Course = ({
+export default ({
   course: {
     abbreviation,
     number,
@@ -22,7 +15,7 @@ const Course = ({
     sections,
   },
 }) => (
-  <View style={styles.view}>
+  <View style={styles.container}>
     <View style={styles.padded}>
       <View>
         <View style={styles.headingName}>
@@ -38,35 +31,25 @@ const Course = ({
         </View>
         <Text style={styles.headingInfoText}>CREDIT HOURS</Text>
       </View>
-    </View>
 
-    {description ? (
       <CourseDescription description={description} comments={comments} />
-    ) : (
-      undefined
-    )}
 
-    <Text style={[styles.padded, styles.sectionsHeader]}>Sections</Text>
-
-    <View>
-      {sections.map((sec, i) => (
-        <Section key={i} haveSameName={haveSameName(sections)} {...sec} />
-      ))}
+      <Text style={styles.sectionsHeader}>Sections</Text>
     </View>
+
+    <View>{sections.map((sec, i) => <Section key={i} {...sec} />)}</View>
   </View>
 )
 
 const styles = StyleSheet.create({
-  view: {
+  container: {
     backgroundColor: "white",
-    marginTop: 30,
-    paddingTop: 20,
-    shadowRadius: 2,
-    shadowOpacity: 0.15,
-    shadowOffset: { height: 2, width: 2 },
     borderRadius: 2,
-    marginLeft: 10,
-    marginRight: 10,
+    marginBottom: 30,
+    paddingTop: 20,
+    shadowOffset: { height: 2, width: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 2,
   },
   padded: {
     paddingLeft: 20,
@@ -76,15 +59,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   headingNameAbbreviation: {
+    color: style.colors.almostBlack,
     fontSize: 40,
     fontWeight: "900",
     paddingRight: 10,
   },
   headingNameNumber: {
+    color: style.colors.almostBlack,
     fontSize: 40,
     fontWeight: "400",
   },
   headingFullTitle: {
+    color: style.colors.almostBlack,
     fontSize: 20,
     fontWeight: "300",
     marginBottom: 20,
@@ -94,7 +80,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headingInfoNumber: {
-    backgroundColor: "black",
+    backgroundColor: style.colors.almostBlack,
     borderRadius: 10,
     marginRight: 10,
     padding: 5,
@@ -104,13 +90,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   headingInfoText: {
+    color: style.colors.almostBlack,
     fontSize: 20,
   },
   sectionsHeader: {
-    marginTop: 20,
+    color: style.colors.almostBlack,
     fontSize: 32,
     fontWeight: "bold",
+    marginTop: 20,
   },
 })
-
-export default Course
